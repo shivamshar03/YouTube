@@ -1,0 +1,30 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --header-height: 64px;
+}
+
+html, body, :root {
+  height: 100%;
+}
+
+body {
+  @apply bg-white text-gray-900 dark:bg-neutral-950 dark:text-gray-100;
+}
+
+.container-page {
+  @apply max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8;
+}
+
+/* Hide scrollbars in thumbnails grid on some browsers */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+

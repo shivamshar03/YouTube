@@ -1,0 +1,72 @@
+{
+  "compilerOptions": {
+    "target": "ES2020",
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "es2020"
+    ],
+    "allowJs": false,
+    "skipLibCheck": true,
+    "strict": true,
+    "noEmit": true,
+    "esModuleInterop": true,
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsx": "preserve",
+    "incremental": true,
+    "forceConsistentCasingInFileNames": true,
+    "baseUrl": ".",
+    "paths": {
+      "@/components/*": [
+        "components/*"
+      ],
+      "@/components/header": [
+        "components/header.tsx"
+      ],
+      "@/components/sidebar": [
+        "components/sidebar.tsx"
+      ],
+      "@/components/quick-start-guide": [
+        "stubs/Empty.tsx"
+      ],
+      "@/components/ui/*": [
+        "stubs/Empty.tsx"
+      ],
+      "@/components/upload-form": [
+        "stubs/Empty.tsx"
+      ],
+      "@/lib/*": [
+        "lib/*"
+      ],
+      "@/data/*": [
+        "data/*"
+      ]
+    },
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ]
+  },
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    "**/*.cjs",
+    "**/*.mjs",
+    ".next/types/**/*.ts"
+  ],
+  "exclude": [
+    "node_modules",
+    "components/header.tsx",
+    "components/sidebar.tsx",
+    "components/ui/**",
+    "components/quick-start-guide.tsx",
+    "components/upload-form.tsx",
+    "app/setup/**",
+    "app/upload/**"
+  ]
+}
