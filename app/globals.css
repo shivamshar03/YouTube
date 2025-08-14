@@ -15,7 +15,7 @@ body {
 }
 
 .container-page {
-  @apply max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8;
+  @apply w-full max-w-[1600px] mx-auto px-3 sm:px-4 md:px-6 lg:px-8;
 }
 
 /* Hide scrollbars in thumbnails grid on some browsers */
@@ -25,6 +25,12 @@ body {
 .no-scrollbar {
   -ms-overflow-style: none;
   scrollbar-width: none;
+}
+
+/* Responsive tweaks */
+.aspect-video {
+  /* Ensure consistent rounded corners across embeds */
+  border-radius: 0.75rem;
 }
 
 

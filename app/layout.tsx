@@ -7,6 +7,7 @@ import { UiStateProvider } from '@/components/UiStateProvider'
 import Sidebar from '@/components/sidebar'
 import { ClientDataProvider } from '@/components/ClientDataProvider'
 import { Suspense } from 'react'
+import dynamic from 'next/dynamic'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -26,7 +27,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 <Header />
               </Suspense>
               <Sidebar />
-              <main className="pt-[var(--header-height)] min-h-screen container-page md:pl-64">{children}</main>
+              <main className="pt-[var(--header-height)] min-h-screen container-page md:pl-64 pb-16 md:pb-0">{children}</main>
+              <DynamicMobileNav />
             </ClientDataProvider>
           </UiStateProvider>
         </ThemeProvider>
@@ -34,5 +36,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     </html>
   )
 }
+
+const DynamicMobileNav = dynamic(() => import('@/components/MobileNav'), { ssr: false })
 
 

@@ -8,6 +8,16 @@ const nextConfig = {
       { protocol: 'https', hostname: 'ui-avatars.com' },
     ],
   },
+  async headers() {
+    return [
+      {
+        source: '/(.*)',
+        headers: [
+          { key: 'Referrer-Policy', value: 'strict-origin-when-cross-origin' },
+        ],
+      },
+    ]
+  },
   webpack: (config) => {
     config.resolve = config.resolve || {}
     config.resolve.alias = Object.assign({}, config.resolve.alias || {}, {

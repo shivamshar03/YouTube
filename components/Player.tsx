@@ -1,50 +1,7 @@
 "use client"
-import { useEffect, useRef } from 'react'
 import type { VideoItem } from '@/lib/types'
 
-declare global {
-  interface Window {
-    YT?: any
-    onYouTubeIframeAPIReady?: () => void
-  }
-}
-
 export default function Player({ video }: { video: VideoItem }) {
-  const ref = useRef<HTMLDivElement | null>(null)
-  const iframeRef = useRef<HTMLIFrameElement | null>(null)
-
-  useEffect(() => {
-    if (video.source === 'mp4') return
-
-    if (window.YT && window.YT.Player) {
-      create()
-    } else {
-      const tag = document.createElement('script')
-      tag.src = 'https://www.youtube.com/iframe_api'
-      window.onYouTubeIframeAPIReady = () => {
-        create()
-      }
-      document.body.appendChild(tag)
-    }
-
-    function create() {
-      if (!ref.current || !video.youtubeId) return
-      // eslint-disable-next-line no-new
-      new window.YT.Player(ref.current, {
-        height: '390',
-        width: '640',
-        videoId: video.youtubeId,
-        playerVars: {
-          modestbranding: 1,
-          rel: 0,
-          iv_load_policy: 3,
-          autoplay: 0,
-        },
-        events: {},
-      })
-    }
-  }, [video])
-
   if (video.source === 'mp4' && video.mp4Url) {
     return (
       <video
@@ -55,7 +12,28 @@ export default function Player({ video }: { video: VideoItem }) {
     )
   }
 
-  return <div ref={ref} className="w-full aspect-video rounded-xl overflow-hidden bg-black" />
+  if (video.source === 'youtube' && video.youtubeId) {
+    const params = new URLSearchParams({
+      modestbranding: '1',
+      rel: '0',
+      iv_load_policy: '3',
+      autoplay: '0',
+      origin: typeof window !== 'undefined' ? window.location.origin : '',
+    } as any)
+    const src = `https://www.youtube.com/embed/${video.youtubeId}?${params.toString()}`
+    return (
+      <iframe
+        className="w-full aspect-video rounded-xl overflow-hidden bg-black"
+        src={src}
+        title={video.title}
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        referrerPolicy="strict-origin-when-cross-origin"
+        allowFullScreen
+      />
+    )
+  }
+
+  return <div className="w-full aspect-video rounded-xl overflow-hidden bg-black" />
 }
 
 
